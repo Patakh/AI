@@ -30,7 +30,36 @@ public class PatakhGPT
         // если введенное сообщение имеет длину меньше 1 символа
         // то выходим из цикла и завершаем программу
         if (text is not { Length: > 0 }) return "";
-        text = $"{text}Write the code in C# to get this real information.Code Requirement:100% working without exceptions, namespace should be called DynamicCode,runtime version 8.0.0.0, class should be called DynamicClass, static method without parameters returning a string should be called Execute";
+        text = $"Напиши код на C# для того чтобы узнать {text}" +
+            $" Требования к коду: " +
+            $" провереныый рабочий код который работает без исключений и возможных ошибок," +
+            $" Не использует много библиотек," +
+            $" код должен компилироваться диннамачески," + 
+            $" пространство имен должно называться Dynamic Code," +
+            $" класс должен называться DynamicClass," +
+            $" обработка строк производить без использования сложных преобразований типов,"+
+            $" метод без параметров, возвращает строку или Task.Result," +
+            $" метод должен называться Execute," +
+            $" метод Execute должен быть статическим," +
+            $" Должен работать сразу без нтконо изменения."+
+            $" Данные должны быть реальными."+
+            $" Данные выдать сразу."+ 
+            $" Использовать функционал только библиотек:" +
+            $" System.Private.CoreLib.dll," +
+            $" System.Net.Http.dll," +
+            $" System.Net.dll," +
+            $" System.Net.WebClient.dll," +
+            $" System.Net.Requests.dll," +
+            $" System.Text.Json.dll," +
+            $" System.ComponentModel.Primitives.dll," +
+            $" System.Memory.dll," +
+            $" System.Runtime.dll," +
+            $" System.Private.Uri.dll," +
+            $" System.Linq.Expressions.dll," +
+            $" Microsoft.CSharp.dll," +
+            $" Newtonsoft.Json.dll."+
+            $" Выпонлни все требования.";
+
         // формируем отправляемое сообщение
         var message = new Message() { Role = "user", Content = text };
 
@@ -40,7 +69,7 @@ public class PatakhGPT
         // формируем отправляемые данные
         var requestData = new Request()
         {
-            ModelId = "gpt-3.5-turbo",
+            ModelId = "gpt-4",
             Messages = messages
         };
         // отправляем запрос

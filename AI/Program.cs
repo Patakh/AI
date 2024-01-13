@@ -1,6 +1,6 @@
 ﻿using AI.Model;
 
-PatakhGPT patakhGPT = new PatakhGPT("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");
+PatakhGPT patakhGPT = new PatakhGPT("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");
 
 // ввод сообщения пользователя
 Console.Write("User: ");
@@ -9,10 +9,14 @@ string? contentet = Console.ReadLine();
 string? result = await patakhGPT.Request(contentet);
 Console.WriteLine(result);
 
-if (result.Contains("csharp"))
-{
-    string delimiter = "```";
-    string[] code = result.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+//разбиваем текст на код
+string delimiter = "```";
+string[] text = result.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+int index = text[1].IndexOf("\n");
+string code = text[1].Substring(index + 1);
 
-    Code.Run(code[1].Substring(6));
-}
+//результат выполнения кода 
+Console.WriteLine(Code.Run(code)); 
+
+
+
